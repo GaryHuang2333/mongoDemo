@@ -1,0 +1,14 @@
+FROM mongo:latest
+# refer to https://github.com/docker-library/mongo/blob/master/5.0/Dockerfile
+MAINTAINER Gary Huang
+
+# for setup mongos
+
+# for setup mongod
+
+# for setup configserver
+
+
+
+
+EXPOSE 27017
