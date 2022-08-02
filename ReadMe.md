@@ -348,7 +348,7 @@ mongos --configdb myMC_config1:27017,myMC_config1:27017,myMC_config1:27017
 
 ```
 ---
-
+https://gitee.com/GaryHuang2333/WorkingNotes/blob/master/DockerMongoClusterNotes.txt
 ---
 Docker tips : 
 ```bash
