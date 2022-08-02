@@ -1,16 +1,5 @@
 This project is used for mongoDB cluster demo
 
-
-
-1. use docker to build a lightweight linux env and install mongodb - ok
-
-2. replicate the docker image and run 3 nodes of replica set
-
-
-
-
-
-
 #1 pull latest mongo image
 ```bash
 # docker pull [OPTIONS] NAME[:TAG|@DIGEST]
@@ -161,9 +150,9 @@ which vim
 
 # 3.setup configServer replicaSet
 # 3.1.prepare mongo config files
-cp -pr /etc/mongod.conf.orig /etc/mongoConf1.conf
-cp -pr /etc/mongod.conf.orig /etc/mongoConf2.conf
-cp -pr /etc/mongod.conf.orig /etc/mongoConf3.conf
+cp -pr /etc/mongodS0.conf.orig /etc/mongoConf1.conf
+cp -pr /etc/mongodS0.conf.orig /etc/mongoConf2.conf
+cp -pr /etc/mongodS0.conf.orig /etc/mongoConf3.conf
 
 # 3.2.adjust configuration files and related folder
 "---- mongoConf1.conf ----------------------------
@@ -215,9 +204,9 @@ done, success init config server replica set
 
 # 4.setup shardReplicaSets
 # 4.1.prepare mongo config files
-cp -pr /etc/mongod.conf.orig /etc/mongodS0N1.conf
-cp -pr /etc/mongod.conf.orig /etc/mongodS0N2.conf
-cp -pr /etc/mongod.conf.orig /etc/mongodS0N3.conf
+cp -pr /etc/mongodS0.conf.orig /etc/mongodS0N1.conf
+cp -pr /etc/mongodS0.conf.orig /etc/mongodS0N2.conf
+cp -pr /etc/mongodS0.conf.orig /etc/mongodS0N3.conf
 
 # 4.2.adjust configuration files and related folder
 "---- mongodS0N1.conf ----------------------------
@@ -268,7 +257,7 @@ done, success init shard0 replica set
 
 # 5.setup mongos
 # 5.1.prepare mongo config files
-cp -pr /etc/mongod.conf.orig /etc/mongodSN1.conf
+cp -pr /etc/mongodS0.conf.orig /etc/mongodSN1.conf
 
 # 5.2.adjust configuration files and related folder
 "---- mongodSN1.conf ---------------------------- 
@@ -357,16 +346,10 @@ mongos --configdb myMC_config1:27017,myMC_config1:27017,myMC_config1:27017
 
 # Shard a Collection
 
-# 
 ```
+---
 
-config in multi servers
-via config files
-
-
-
-
------
+---
 Docker tips : 
 ```bash
 #show all container ID
