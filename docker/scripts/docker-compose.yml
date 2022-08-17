@@ -1,0 +1,234 @@
+#version: "3.5"
+networks:
+  myMongoNetwork:
+    name: myMongoNetwork
+
+services:
+  #  startup mongo configRS
+  mongoConfig1:
+    image: mongo:latest
+    container_name: myMongoConf1
+    ports:
+      - "9001:27017"
+    volumes:
+      - ../mongoDBs/config1:/mongo/data
+      - ../mongoLogs/config1:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongoConf1", "--replSet", "configRS", "--configsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  mongoConfig2:
+    image: mongo:latest
+    container_name: myMongoConf2
+    ports:
+      - "9002:27017"
+    volumes:
+      - ../mongoDBs/config2:/mongo/data
+      - ../mongoLogs/config2:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongoConf2", "--replSet", "configRS", "--configsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  mongoConfig3:
+    image: mongo:latest
+    container_name: myMongoConf3
+    ports:
+      - "9003:27017"
+    volumes:
+      - ../mongoDBs/config3:/mongo/data
+      - ../mongoLogs/config3:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongoConf3", "--replSet", "configRS", "--configsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  #  startup shard0
+  mongodS0N1:
+    image: mongo:latest
+    container_name: myMongodS0N1
+    ports:
+      - "9101:27017"
+    volumes:
+      - ../mongoDBs/mongodS0N1:/mongo/data
+      - ../mongoLogs/mongodS0N1:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongodS0N1", "--replSet", "mongodS0", "--shardsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  mongodS0N2:
+    image: mongo:latest
+    container_name: myMongodS0N2
+    ports:
+      - "9102:27017"
+    volumes:
+      - ../mongoDBs/mongodS0N2:/mongo/data
+      - ../mongoLogs/mongodS0N2:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongodS0N2", "--replSet", "mongodS0", "--shardsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  mongodS0N3:
+    image: mongo:latest
+    container_name: myMongodS0N3
+    ports:
+      - "9103:27017"
+    volumes:
+      - ../mongoDBs/mongodS0N3:/mongo/data
+      - ../mongoLogs/mongodS0N3:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongodS0N3", "--replSet", "mongodS0", "--shardsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  #  startup shard1
+  mongodS1N1:
+    image: mongo:latest
+    container_name: myMongodS1N1
+    ports:
+      - "9201:27017"
+    volumes:
+      - ../mongoDBs/mongodS1N1:/mongo/data
+      - ../mongoLogs/mongodS1N1:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongodS1N1", "--replSet", "mongodS1", "--shardsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  mongodS1N2:
+    image: mongo:latest
+    container_name: myMongodS1N2
+    ports:
+      - "9202:27017"
+    volumes:
+      - ../mongoDBs/mongodS1N2:/mongo/data
+      - ../mongoLogs/mongodS1N2:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongodS1N2", "--replSet", "mongodS1", "--shardsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  mongodS1N3:
+    image: mongo:latest
+    container_name: myMongodS1N3
+    ports:
+      - "9203:27017"
+    volumes:
+      - ../mongoDBs/mongodS1N3:/mongo/data
+      - ../mongoLogs/mongodS1N3:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongodS1N3", "--replSet", "mongodS1", "--shardsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  #  startup shard2
+  mongodS2N1:
+    image: mongo:latest
+    container_name: myMongodS2N1
+    ports:
+      - "9301:27017"
+    volumes:
+      - ../mongoDBs/mongodS2N1:/mongo/data
+      - ../mongoLogs/mongodS2N1:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongodS2N1", "--replSet", "mongodS2", "--shardsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  mongodS2N2:
+    image: mongo:latest
+    container_name: myMongodS2N2
+    ports:
+      - "9302:27017"
+    volumes:
+      - ../mongoDBs/mongodS2N2:/mongo/data
+      - ../mongoLogs/mongodS2N2:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongodS2N2", "--replSet", "mongodS2", "--shardsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  mongodS2N3:
+    image: mongo:latest
+    container_name: myMongodS2N3
+    ports:
+      - "9303:27017"
+    volumes:
+      - ../mongoDBs/mongodS2N3:/mongo/data
+      - ../mongoLogs/mongodS2N3:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongod", "--bind_ip", "localhost,myMongodS2N3", "--replSet", "mongodS2", "--shardsvr", "--port", "27017", "--dbpath", "/mongo/data", "--logpath", "/mongo/log/mongod.log"]
+
+  # RS init
+  mongoRSInit:
+    image: mongo:latest
+    container_name: myMongoRSInit
+    restart: "no"
+    entrypoint: ["bash", "-c", "sleep 5 && mongosh --host myMongoConf1:27017 --eval 'rs.initiate({_id: \"configRS\", members: [{_id: 0, host: \"myMongoConf1:27017\"}, {_id: 1, host: \"myMongoConf2:27017\"}, {_id: 2, host: \"myMongoConf3:27017\"}]});'"]
+    networks:
+      - myMongoNetwork
+    depends_on:
+      - mongoConfig1
+      - mongoConfig2
+      - mongoConfig3
+
+  mongodS0Init:
+    image: mongo:latest
+    container_name: myMongodS0Init
+    restart: "no"
+    entrypoint: ["bash", "-c", "sleep 5 && mongosh --host myMongodS0N1:27017 --eval 'rs.initiate({_id: \"mongodS0\", members: [{_id: 0, host: \"myMongodS0N1:27017\"}, {_id: 1, host: \"myMongodS0N2:27017\"}, {_id: 2, host: \"myMongodS0N3:27017\"}]});'"]
+    networks:
+      - myMongoNetwork
+    depends_on:
+      - mongodS0N1
+      - mongodS0N2
+      - mongodS0N3
+
+  mongodS1Init:
+    image: mongo:latest
+    container_name: myMongodS1Init
+    restart: "no"
+    entrypoint: ["bash", "-c", "sleep 5 && mongosh --host myMongodS1N1:27017 --eval 'rs.initiate({_id: \"mongodS1\", members: [{_id: 0, host: \"myMongodS1N1:27017\"}, {_id: 1, host: \"myMongodS1N2:27017\"}, {_id: 2, host: \"myMongodS1N3:27017\"}]});'"]
+    networks:
+      - myMongoNetwork
+    depends_on:
+      - mongodS1N1
+      - mongodS1N2
+      - mongodS1N3
+
+  mongodS2Init:
+    image: mongo:latest
+    container_name: myMongodS2Init
+    restart: "no"
+    entrypoint: ["bash", "-c", "sleep 5 && mongosh --host myMongodS2N1:27017 --eval 'rs.initiate({_id: \"mongodS2\", members: [{_id: 0, host: \"myMongodS2N1:27017\"}, {_id: 1, host: \"myMongodS2N2:27017\"}, {_id: 2, host: \"myMongodS2N3:27017\"}]});'"]
+    networks:
+      - myMongoNetwork
+    depends_on:
+      - mongodS2N1
+      - mongodS2N2
+      - mongodS2N3
+
+  #  startup mongos
+  mongos1:
+    image: mongo:latest
+    container_name: myMongos1
+    ports:
+      - "8081:27017"
+    volumes:
+      - ../mongoLogs/mongos1:/mongo/log
+    networks:
+      - myMongoNetwork
+    entrypoint: ["mongos", "--bind_ip", "localhost,myMongos1", "--port", "27017" ,"--configdb", "configRS/myMongoConf1:27017,myMongoConf2:27017,myMongoConf3:27017", "--logpath", "/mongo/log/mongod.log"]
+    depends_on:
+      - mongoRSInit
+      - mongodS0Init
+      - mongodS1Init
+      - mongodS2Init
+
+  mongodAddShard:
+    image: mongo:latest
+    container_name: myMongodAddShard
+    restart: "no"
+    entrypoint: ["bash", "-c", "sleep 20 && mongosh --host myMongos1 --port 27017 --eval 'sh.addShard(\"mongodS0/myMongodS0N1:27017,myMongodS0N2:27017,myMongodS0N3:27017\");sh.addShard(\"mongodS1/myMongodS1N1:27017,myMongodS1N2:27017,myMongodS1N3:27017\");sh.addShard(\"mongodS2/myMongodS2N1:27017,myMongodS2N2:27017,myMongodS2N3:27017\");'"]
+    networks:
+      - myMongoNetwork
+    depends_on:
+      - mongos1
+
+# docker compose down -v
+# rm -rf ../mongoLogs/*
+# rm -rf ../mongoDBs/*
+

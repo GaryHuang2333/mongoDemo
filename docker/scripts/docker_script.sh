@@ -145,6 +145,8 @@ config_configRS() {
 # apt-get update
 # apt-get install net-tools
 # ifconfig
+# apt-get install inetutils-ping
+# ping
   echo ""
 }
 
