@@ -250,12 +250,14 @@ services:
       - mongodS1Init
       - mongodS2Init
 
-  # add shards into cluster
-  mongodAddShard:
+  # prepare data
+  mongoDataPrepare:
     image: mongo:latest
-    container_name: myMongodAddShard
+    container_name: myMongoDataPrepare
+    volumes:
+      - ./deployMongoCluster.js:/mongo/script/deployMongoCluster.js
     restart: "no"
-    entrypoint: ["bash", "-c", "sleep 30 && mongosh --host myMongos1 --port 27017 --eval 'sh.addShard(\"mongodS0/myMongodS0N1:27017,myMongodS0N2:27017,myMongodS0N3:27017\");sh.addShard(\"mongodS1/myMongodS1N1:27017,myMongodS1N2:27017,myMongodS1N3:27017\");sh.addShard(\"mongodS2/myMongodS2N1:27017,myMongodS2N2:27017,myMongodS2N3:27017\");'"]
+    entrypoint: ["bash", "-c", "sleep 30 && mongosh --host myMongos1 --port 27017 -f /mongo/script/deployMongoCluster.js && exit"]
     networks:
       - myMongoNetwork
     depends_on:

@@ -2,6 +2,7 @@
 /.mvn/
 /docker/mongoDBs/
 /docker/mongoLogs/
+/docker/dockerLogs/
 /target/
 
 mvnw
