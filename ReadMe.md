@@ -21,7 +21,8 @@ docker run -itd --name myMongoContainer -p 8081:27017 mongo --auth  # same as ab
 
 #3 添加用户和设置密码，并且尝试连接。 
 ```bash
-# docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+# docker
+# exec [OPTIONS] CONTAINER COMMAND [ARG...]
 docker exec -it myMongoContainer mongo admin # mongo shell is deprecated, perfer to mongosh 
 docker exec -it myMongoContainer mongosh admin
 ```
@@ -347,10 +348,17 @@ mongos --configdb myMC_config1:27017,myMC_config1:27017,myMC_config1:27017
 # Shard a Collection
 
 ```
----
+
+config multiply containers via docker compose -> successfully
+```bash
+refer to deployMongoCluster.sh and deployMongoCluster-dockerCompose.yml
+```
+
+# * Docker tips : 
+
+```bash
 https://gitee.com/GaryHuang2333/WorkingNotes/blob/master/DockerMongoClusterNotes.txt
----
-Docker tips : 
+```
 ```bash
 #show all container ID
 docker ps -aq
@@ -369,4 +377,52 @@ docker exec -it myMongoContainer1 bash -c "echo myMongoContainer1; cat /etc/host
 
 ```
 
-# mongoDemo
+#8 setup Java app
+This is a weibo  
+
+- Functionality
+  - user login server via accountID+accountPWD
+  - user have basic info (name, age, gender, hobbies)
+  - user have social info (fans, following, like, favourite)
+  - user can read others blogs
+  - user can post blogs
+  - currently, all blogs only include wordings, no photo or audio or video, can have links
+  - user can repost others blogs
+- Structures
+  - front-end side:
+  - server-side:
+    - login components
+    - DAO components
+    - 
+  - cache-side:
+  - db-side:
+    - userDB
+      - user
+        - name : string
+        - age : int ([0,120])
+        - gender : string (male/female)
+        - hobbies : string (list of hobbies, seperated by ",")
+        - fans : string (list of usernames, seperated by ",")
+        - fansNum : int
+        - followings : string (list of usernames, seperated by ",")
+        - followingsNum : int
+        - like : string (list of blog id, seperated by ",")
+        - favourite : string (list of blog id, seperated by ",")
+        - blogsIds : string (list of posted blog id, repost is included, seperated by ",")
+        - blogsNum : int
+      - admin
+        - name : string
+        - tbc
+    - blogDB
+      - blog
+        - blogId : string
+        - tittle : string (encrypted for small size)
+        - author : string
+        - createTS : timestamp
+        - modifyTS : timestamp
+        - content : string (encrypted for small size)
+        - beRepostedNum : int
+        - beLikedNum : int
+    - connection string 
+      - mongodb://myMongos1:27017,myMongos2:27017,myMongos3:27017
+      - mongodb://username:password@myMongos1:27017,myMongos2:27017,myMongos3:27017/?authSource=admin

@@ -9,12 +9,12 @@ echoUsage() { echoYellow "Usage: $0 {up|down|clean|check}"; exit 1; }
 
 up() {
   echo "#### start mongo cluster "
-  docker compose -f docker-compose.yml up -d
+  docker compose -f deployMongoCluster-dockerCompose.yml up -d
 }
 
 down() {
    echo "#### stop mongo cluster "
-   docker compose -f docker-compose.yml down
+   docker compose -f deployMongoCluster-dockerCompose.yml down
 }
 
 clean() {
