@@ -1,8 +1,8 @@
-package com.gary.mongodemo;
+package com.gary.mongodemo.maintest;
 
-import com.gary.mongodemo.entities.Blog;
-import com.gary.mongodemo.entities.User;
+import com.gary.mongodemo.maintest.entities.Blog;
 
+import com.gary.mongodemo.maintest.entities.User;
 import com.mongodb.client.*;
 import org.bson.Document;
 
@@ -28,9 +28,7 @@ public class MainTest {
     }
 
     public static void rawConnection() {
-//        - connection string
-//            - mongodb://myMongos1:27017,myMongos2:27017,myMongos3:27017
-//            - mongodb://username:password@myMongos1:27017,myMongos2:27017,myMongos3:27017/?authSource=admin
+//        String uri = "mongodb://myMongos1:27017,myMongos2:27017,myMongos3:27017";  // failed as not setup in local /etc/hosts
         String uri = "mongodb://localhost:8081,localhost:8082,localhost:8083";
         MongoClient mongoClient = MongoClients.create(uri);
 
@@ -54,9 +52,7 @@ public class MainTest {
     }
 
     public static void codecConnection() {
-//        - connection string
-//            - mongodb://myMongos1:27017,myMongos2:27017,myMongos3:27017
-//            - mongodb://username:password@myMongos1:27017,myMongos2:27017,myMongos3:27017/?authSource=admin
+//        String uri = "mongodb://myMongos1:27017,myMongos2:27017,myMongos3:27017";  // failed as not setup in local /etc/hosts
         String uri = "mongodb://localhost:8081,localhost:8082,localhost:8083";
         MongoClient mongoClient = MongoClients.create(uri);
 

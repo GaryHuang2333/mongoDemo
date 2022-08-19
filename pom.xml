@@ -34,13 +34,18 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--MongoDB related -->
+        <!--MongoDB related, dry java with mongo connection-->
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
             <version>4.7.1</version>
         </dependency>
 
+        <!--MongoDB related, springboot java with mongo connection-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

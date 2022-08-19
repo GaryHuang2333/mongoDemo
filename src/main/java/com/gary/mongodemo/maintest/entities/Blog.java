@@ -1,4 +1,4 @@
-package com.gary.mongodemo.entities;
+package com.gary.mongodemo.maintest.entities;
 
 import java.util.Date;
 

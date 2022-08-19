@@ -2,3 +2,10 @@ server:
   port: 8080
   servlet:
     context-path: /mongo
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:8081,localhost:8082,localhost:8083
+#      uri: mongodb://myMongos1:27017,myMongos2:27017,myMongos3:27017  # failed as not setup in local /etc/hosts
+      database: userDB

@@ -1,8 +1,6 @@
-package com.gary.mongodemo.entities;
+package com.gary.mongodemo.maintest.entities;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
 
 /**
  *       - user
@@ -19,11 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *               - blogsIds : string (list of posted blog id, repost is included, seperated by ",")
  *               - blogsNum : int
  */
-
-@Document("user")
 public class User {
-    @Id
-    private String id;
     private String name;
     private int age;
     private String gender;
@@ -36,16 +30,6 @@ public class User {
     private String favourite;
     private String blogsIds;
     private int blogsNum;
-
-    public void setRandomName(){
-        double random = Math.floor(Math.random() * 1000);
-        this.name = name + "_" + random;
-    }
-
-    public void renewObjectId() {
-        ObjectId objectId = new ObjectId();
-        this.id = objectId.toString();
-    }
 
     public String getName() {
         return name;
@@ -140,25 +124,6 @@ public class User {
     }
 
     public void setBlogsNum(int blogsNum) {
-        this.blogsNum = blogsNum;
-    }
-
-    public User() {
-    }
-
-    public User(String id, String name, int age, String gender, String hobbies, String fans, int fansNum, String followings, int followingNum, String like, String favourite, String blogsIds, int blogsNum) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
-        this.hobbies = hobbies;
-        this.fans = fans;
-        this.fansNum = fansNum;
-        this.followings = followings;
-        this.followingNum = followingNum;
-        this.like = like;
-        this.favourite = favourite;
-        this.blogsIds = blogsIds;
         this.blogsNum = blogsNum;
     }
 
