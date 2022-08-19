@@ -1,0 +1,10 @@
+/.idea/
+/.mvn/
+/docker/mongoDBs/
+/docker/mongoLogs/
+/target/
+
+mvnw
+mvnw.cmd
+HELP.md
+mongoDemo.iml
